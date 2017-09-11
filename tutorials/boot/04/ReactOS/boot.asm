@@ -79,13 +79,8 @@ section .text
 mov si, STR
 call print_phrase
 
-jmp $
-
-%include "printf.asm"
-
 STR: db "Welcome to ReactOS", 0
 ;This part is from that tutorial from osdev.org
-;; IMPORTANT !! :)
 
 Entry:          jmp     real_start
 
