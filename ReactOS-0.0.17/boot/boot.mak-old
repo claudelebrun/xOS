@@ -47,12 +47,21 @@
 #AFLAGS  =	/zi /DDEBUG
 #LFLAGS  =	/v
 
-tasm : "C:\Program Files (x86)\GUI Turbo Assembler\BIN\tasm.exe"
-tlink : "C:\Program Files (x86)\GUI Turbo Assembler\BIN\tlink.exe"
+PRODUCT =	boot.bin
+
+all:		$(PRODUCT)
+
+production:	all
+		copy boot.bin ..\..\dist\boot.bin
+		del *.bin
+		del *.map
 
 boot.bin:	boot.asm
-		$tasm $(AFLAGS) boot,,
-		$tlink $(LFLAGS) boot
+		tasm $(AFLAGS) boot,,
+		tlink $(LFLAGS) boot
+		..\utils\exe2bin boot boot.bin
+		del boot.obj
+		del boot.exe
 
 clean:
 		del *.lst
@@ -62,3 +71,4 @@ clean:
 		del *.las
 		del *.obj
 		del *.exe
+
